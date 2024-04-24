@@ -14,22 +14,25 @@ import java.util.Optional;
 @RequestMapping
 public class UserController {
     private final UserService userService;
+
     @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createUser(@RequestBody User user){
-     return userService.createUser(user);
+    public Long createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
+
     @GetMapping(value = "/users")
-    public List<User> getAllUser(){
-       return userService.getAll();
+    public List<User> getAllUser() {
+        return userService.getAll();
     }
+
     @GetMapping(value = "/users/{id}")
-    public Optional<User> getUserById(@PathVariable Long id){
-     return userService.getById(id);
+    public Optional<User> getUserById(@PathVariable Long id) {
+        return userService.getById(id);
     }
 
     @PostMapping(value = "/users/user")
-    public Long updateUser (@RequestBody User user){
-      return userService.update(user);
+    public Long updateUser(@RequestBody User user) {
+        return userService.update(user);
     }
 }

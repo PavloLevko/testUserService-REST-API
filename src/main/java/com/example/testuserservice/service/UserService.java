@@ -16,13 +16,16 @@ public class UserService {
     public Long createUser(User user) {
         return userRepository.save(user).getId();
     }
-    public List<User> getAll(){
+
+    public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
-    public Optional<User> getById (Long id){
+
+    public Optional<User> getById(Long id) {
         return userRepository.findById(id);
     }
-    public Long update(User user){
+
+    public Long update(User user) {
         return userRepository.save(user).getId();
     }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "test")
@@ -18,4 +19,6 @@ public class User {
     private String lastName;
     @Column(name = "birth_data")
     private Date birthData;
+    @Column(name = "phone_number")
+    private int phoneNumber;
 }
