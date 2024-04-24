@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +22,9 @@ public class UserController {
     @GetMapping(value = "/users")
     public List<User> getAllUser(){
        return userService.getAll();
+    }
+    @GetMapping(value = "/users/{id}")
+    public Optional<User> getUserById(@PathVariable Long id){
+     return userService.getById(id);
     }
 }
