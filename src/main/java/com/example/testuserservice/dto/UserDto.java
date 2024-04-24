@@ -1,8 +1,6 @@
 package com.example.testuserservice.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,8 +14,8 @@ public class UserDto {
     private String firstName;
     @Size(min = 2, max = 30, message = "Wrong input lastname! Please input min 2 chars.")
     private String lastName;
-    @NotBlank(message = "This field doesn't be blank!")
+    @NotNull(message = "This field doesn't be blank!")
     private Date birthData;
-    @Size(min = 10, max = 14, message = "Wrong input phone number! Please input min 10 numbers.")
+    @Min(value = 8, message = "Wrong input phone number! Please input min 10 numbers.")
     private int phoneNumber;
 }

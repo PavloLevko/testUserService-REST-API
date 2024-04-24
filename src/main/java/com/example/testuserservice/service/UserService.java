@@ -1,8 +1,10 @@
 package com.example.testuserservice.service;
 
+import com.example.testuserservice.dto.UserDto;
 import com.example.testuserservice.entity.User;
 import com.example.testuserservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +14,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final ModelMapper mapper;
 
-    public Long createUser(User user) {
-        return userRepository.save(user).getId();
+    public Long createUser(UserDto user) {
+        return userRepository.save(mapper.map(user, User.class)).getId();
     }
 
     public List<User> getAll() {
@@ -27,6 +30,9 @@ public class UserService {
 
     public Long update(User user) {
         return userRepository.save(user).getId();
+    }
+    public void deleted(Long id){
+        userRepository.deleteById(id);
     }
 
 

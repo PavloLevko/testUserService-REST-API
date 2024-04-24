@@ -2,6 +2,7 @@ package com.example.testuserservice.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class User {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Temporal(TemporalType.DATE)
     @Column(name = "birth_data")
     private Date birthData;
     @Column(name = "phone_number")
