@@ -2,6 +2,7 @@ package com.example.testuserservice.controller;
 
 import com.example.testuserservice.dto.UserDto;
 import com.example.testuserservice.entity.User;
+import com.example.testuserservice.exception.ApiRequestException;
 import com.example.testuserservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,21 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public List<User> getAllUser() {
-        return userService.getAll();
+        List<User> allUsers = userService.getAll();
+        if(allUsers.isEmpty()){
+            throw new ApiRequestException("Can't get all Users.");
+        }
+        return allUsers;
     }
+
 
     @GetMapping(value = "/users/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.getById(id);
+        Optional<User> userbyId = userService.getById(id);
+        if (userbyId.isEmpty()){
+            throw new ApiRequestException("Can't get User with id:" + id);
+        }
+        return userbyId;
     }
 
     @PostMapping(value = "/users/user")
