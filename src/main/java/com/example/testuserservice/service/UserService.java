@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +31,14 @@ public class UserService {
     }
 
     public Long update(User user) {
-        return userRepository.save(user).getId();
+        return userRepository.save(mapper.map(user, User.class)).getId();
     }
-    public void deleted(Long id){
+
+    public void deleted(Long id) {
         userRepository.deleteById(id);
+    }
+    public List<User> findByDataRange(Date from, Date to){
+        return userRepository.findByDataRange(from, to);
     }
 
 
