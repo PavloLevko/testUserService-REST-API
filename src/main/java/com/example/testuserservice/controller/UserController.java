@@ -15,11 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping
 public class UserController {
     private final UserService userService;
 
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,7 +38,6 @@ public class UserController {
         return allUsers;
     }
 
-
     @GetMapping(value = "/users/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
         Optional<User> userById = userService.getById(id);
@@ -51,6 +52,11 @@ public class UserController {
         Long updateUser = userService.update(user);
         return updateUser;
     }
+    @PatchMapping(value = "/users/{id}")
+    public void partialUpdate (@PathVariable Long id, @RequestBody UserDto userDto){
+        userService.partialUpdate(id, userDto);
+    }
+
     @DeleteMapping(value = "/users/{id}")
     public void deletedUserById(@PathVariable Long id){
         userService.deleted(id);

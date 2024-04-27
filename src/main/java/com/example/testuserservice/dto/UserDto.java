@@ -3,6 +3,7 @@ package com.example.testuserservice.dto;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+
 import java.util.Date;
 @Data
 public class UserDto {
