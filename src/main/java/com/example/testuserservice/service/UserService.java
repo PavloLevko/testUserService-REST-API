@@ -3,7 +3,6 @@ package com.example.testuserservice.service;
 import com.example.testuserservice.dto.UserDto;
 import com.example.testuserservice.entity.User;
 import com.example.testuserservice.repository.UserRepository;
-import com.example.testuserservice.service.mapper.UserMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +15,13 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
-    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper mapper, UserMapper userMapper) {
+    public UserService(UserRepository userRepository, ModelMapper mapper) {
         this.userRepository = userRepository;
         this.mapper = mapper;
-        this.userMapper = userMapper;
     }
 
     public Long createUser(UserDto user) {
-
         return userRepository.save(mapper.map(user, User.class)).getId();
     }
 
@@ -44,8 +40,25 @@ public class UserService {
 
     public void partialUpdate(Long id, UserDto userDto) {
         Optional<User> userOptional = userRepository.findById(id);
-        User user = userOptional.get();
-        userMapper.mapUserFromUserDto(userDto, user);
+        if(userDto.getEmail()!=null){
+            userOptional.get().setEmail(userDto.getEmail());
+        }
+        if(userDto.getBirthData()!=null){
+            userOptional.get().setBirthData(userDto.getBirthData());
+        }
+        if (userDto.getFirstName()!=null){
+            userOptional.get().setFirstName(userDto.getFirstName());
+        }
+        if (userDto.getLastName()!=null){
+            userOptional.get().setLastName(userDto.getLastName());
+        }
+        else if (userDto.getPhoneNumber()!=0){
+            userOptional.get().setPhoneNumber(userDto.getPhoneNumber());
+        }
+        User user = new User();
+        user = userOptional.get();
+
+
         userRepository.save(user);
     }
 

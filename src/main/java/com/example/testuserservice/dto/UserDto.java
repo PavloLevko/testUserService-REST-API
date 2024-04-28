@@ -1,11 +1,10 @@
 package com.example.testuserservice.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Data;
 
 
 import java.util.Date;
-@Data
+
 public class UserDto {
 
     private Long id;
@@ -19,4 +18,52 @@ public class UserDto {
     private Date birthData;
     @Min(value = 8, message = "Wrong input phone number! Please input min 10 numbers.")
     private int phoneNumber;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getBirthData() {
+        return birthData;
+    }
+
+    public void setBirthData(Date birthData) {
+        this.birthData = birthData;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

@@ -4,7 +4,6 @@ import com.example.testuserservice.dto.UserDto;
 import com.example.testuserservice.entity.User;
 import com.example.testuserservice.exception.ApiRequestException;
 import com.example.testuserservice.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -52,7 +51,7 @@ public class UserController {
         Long updateUser = userService.update(user);
         return updateUser;
     }
-    @PatchMapping(value = "/users/{id}")
+    @PatchMapping(value = "/users/user/{id}")
     public void partialUpdate (@PathVariable Long id, @RequestBody UserDto userDto){
         userService.partialUpdate(id, userDto);
     }

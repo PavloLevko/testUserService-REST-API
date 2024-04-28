@@ -1,12 +1,8 @@
 package com.example.testuserservice.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-
-@Data
 @Entity
 @Table(name = "test")
 public class User {
@@ -23,4 +19,64 @@ public class User {
     private Date birthData;
     @Column(name = "phone_number")
     private int phoneNumber;
+
+    public User() {
+    }
+
+    public User(Long id, String email, String firstName, String lastName, Date birthData, int phoneNumber) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthData = birthData;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getBirthData() {
+        return birthData;
+    }
+
+    public void setBirthData(Date birthData) {
+        this.birthData = birthData;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
