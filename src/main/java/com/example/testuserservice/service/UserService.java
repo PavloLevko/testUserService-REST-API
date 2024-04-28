@@ -2,10 +2,15 @@ package com.example.testuserservice.service;
 
 import com.example.testuserservice.dto.UserDto;
 import com.example.testuserservice.entity.User;
+import com.example.testuserservice.exception.ApiRequestException;
 import com.example.testuserservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +27,7 @@ public class UserService {
     }
 
     public Long createUser(UserDto user) {
+        validationUserAge(user);
         return userRepository.save(mapper.map(user, User.class)).getId();
     }
 
@@ -72,8 +78,16 @@ public class UserService {
     }
 
     public void validationUserAge(UserDto user) {
-
+        Date birthDate = user.getBirthData();
+        LocalDate birthDateLocal = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate now = LocalDate.now();
+        int years = Period.between(birthDateLocal, now).getYears();
+        if (years < 18) {
+            throw new ApiRequestException("Only for 18 and older");
+        }
     }
+
+
 
 
 }
