@@ -5,6 +5,7 @@ import com.example.testuserservice.entity.User;
 import com.example.testuserservice.exception.ApiRequestException;
 import com.example.testuserservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,8 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    @Value("${targetAge}")
+    private int targetAge;
 
     public UserService(UserRepository userRepository, ModelMapper mapper) {
         this.userRepository = userRepository;
@@ -82,7 +85,8 @@ public class UserService {
         LocalDate birthDateLocal = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate now = LocalDate.now();
         int years = Period.between(birthDateLocal, now).getYears();
-        if (years < 18) {
+
+        if (years < targetAge) {
             throw new ApiRequestException("Only for 18 and older");
         }
     }
