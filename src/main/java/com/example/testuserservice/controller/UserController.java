@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping(value = "/users")
     public List<User> getAllUser() {
         List<User> allUsers = userService.getAll();
-        if(allUsers.isEmpty()){
+        if (allUsers.isEmpty()) {
             throw new ApiRequestException("Can't get all Users.");
         }
         return allUsers;
@@ -40,7 +40,7 @@ public class UserController {
     @GetMapping(value = "/users/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
         Optional<User> userById = userService.getById(id);
-        if (userById.isEmpty()){
+        if (userById.isEmpty()) {
             throw new ApiRequestException("Can't get User with id:" + id);
         }
         return userById;
@@ -51,21 +51,23 @@ public class UserController {
         Long updateUser = userService.update(user);
         return updateUser;
     }
+
     @PatchMapping(value = "/users/user/{id}")
-    public void partialUpdate (@PathVariable Long id, @RequestBody UserDto userDto){
+    public void partialUpdate(@PathVariable Long id, @RequestBody UserDto userDto) {
         userService.partialUpdate(id, userDto);
     }
 
     @DeleteMapping(value = "/users/{id}")
-    public void deletedUserById(@PathVariable Long id){
+    public void deletedUserById(@PathVariable Long id) {
         userService.deleted(id);
-        if(userService.getById(id).isEmpty()){
+        if (userService.getById(id).isEmpty()) {
             throw new ApiRequestException("User with id:" + id + " is absent.");
         }
     }
-    @GetMapping(value ="/users/users/")
+
+    @GetMapping(value = "/users/users/")
     public List<User> getUserByRangeData(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date from,
-                                         @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date to){
-     return userService.findByDataRange(from,to);
+                                         @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date to) {
+        return userService.findByDataRange(from, to);
     }
 }

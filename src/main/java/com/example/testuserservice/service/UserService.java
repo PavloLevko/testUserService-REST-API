@@ -49,19 +49,18 @@ public class UserService {
 
     public void partialUpdate(Long id, UserDto userDto) {
         Optional<User> userOptional = userRepository.findById(id);
-        if(userDto.getEmail()!=null){
+        if (userDto.getEmail() != null) {
             userOptional.get().setEmail(userDto.getEmail());
         }
-        if(userDto.getBirthData()!=null){
+        if (userDto.getBirthData() != null) {
             userOptional.get().setBirthData(userDto.getBirthData());
         }
-        if (userDto.getFirstName()!=null){
+        if (userDto.getFirstName() != null) {
             userOptional.get().setFirstName(userDto.getFirstName());
         }
-        if (userDto.getLastName()!=null){
+        if (userDto.getLastName() != null) {
             userOptional.get().setLastName(userDto.getLastName());
-        }
-        else if (userDto.getPhoneNumber()!=0){
+        } else if (userDto.getPhoneNumber() != 0) {
             userOptional.get().setPhoneNumber(userDto.getPhoneNumber());
         }
         User user = new User();
@@ -87,11 +86,7 @@ public class UserService {
         int years = Period.between(birthDateLocal, now).getYears();
 
         if (years < targetAge) {
-            throw new ApiRequestException("Only for 18 and older");
+            throw new ApiRequestException("Only for" + targetAge + "and older");
         }
     }
-
-
-
-
 }

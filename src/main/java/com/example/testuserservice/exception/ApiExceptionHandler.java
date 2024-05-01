@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
 @ControllerAdvice
 public class ApiExceptionHandler {
     @ExceptionHandler(value = {ApiRequestException.class})
-    public ResponseEntity<Object> handleApiRequestException (ApiRequestException e){
+    public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         ApiException apiException = new ApiException(
                 e.getMessage(),
@@ -19,6 +20,7 @@ public class ApiExceptionHandler {
                 ZonedDateTime.now(ZoneId.of("Z")));
         return new ResponseEntity<>(apiException, badRequest);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;

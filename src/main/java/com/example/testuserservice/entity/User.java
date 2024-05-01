@@ -3,6 +3,7 @@ package com.example.testuserservice.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+
 @Entity
 @Table(name = "test")
 public class User {
