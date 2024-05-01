@@ -1,37 +1,25 @@
-package com.example.testuserservice.entity;
+package com.example.testuserservice.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "test")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserDto {
+
     private Long id;
+    @Email(message = "Wrong email")
     private String email;
-    @Column(name = "first_name")
+    @Size(min = 2, max = 30, message = "Wrong input firstname! Please input min 2 chars.")
     private String firstName;
-    @Column(name = "last_name")
+    @Size(min = 2, max = 30, message = "Wrong input lastname! Please input min 2 chars.")
     private String lastName;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "birth_data")
+    @NotNull(message = "This field doesn't be blank!")
     private Date birthData;
-    @Column(name = "phone_number")
+    @Min(value = 8, message = "Wrong input phone number! Please input min 10 numbers.")
     private int phoneNumber;
-
-    public User() {
-    }
-
-    public User(Long id, String email, String firstName, String lastName, Date birthData, int phoneNumber) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthData = birthData;
-        this.phoneNumber = phoneNumber;
-    }
 
     public Long getId() {
         return id;
