@@ -85,8 +85,11 @@ public class UserService {
         LocalDate now = LocalDate.now();
         int years = Period.between(birthDateLocal, now).getYears();
 
+        if (birthDateLocal.isAfter(now)) {
+            throw new ApiRequestException("Invalid data! Please input correct data.");
+        }
         if (years < targetAge) {
-            throw new ApiRequestException("Only for" + targetAge + "and older");
+            throw new ApiRequestException("Only for " + targetAge + " and older");
         }
     }
 }
